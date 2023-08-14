@@ -1,4 +1,5 @@
 import 'package:chat_app/services/auth/auth_service.dart';
+import 'package:chat_app/utils/commons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: Text('Home Page'),
         actions: [
@@ -37,7 +39,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: _buildUserList(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: _buildUserList(),
+      ),
     );
   }
 
@@ -69,19 +74,22 @@ class _HomePageState extends State<HomePage> {
 
     // display all the users except current user
     if (_auth.currentUser!.email != data['email']) {
-      return ListTile(
-        title: Text(data['email']),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiverUserEmail: data['email'],
-                receiverUserID: data['uid'],
+      return Card(
+        child: ListTile(
+          tileColor: secondaryColor,
+          title: Text(data['email'], style: TextStyle(color: whiteColor)),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChatPage(
+                  receiverUserEmail: data['email'],
+                  receiverUserID: data['uid'],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       );
     } else {
       // return empty container

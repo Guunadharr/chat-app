@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chat_app/utils/commons.dart';
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
@@ -15,9 +16,10 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 60,
         decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(10),
+          color: secondaryColor,
+          borderRadius: BorderRadius.circular(30),
         ),
         child: Center(
           child: Text(

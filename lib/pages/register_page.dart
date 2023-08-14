@@ -24,10 +24,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // sign up user
   void signUp() async {
-    if (passwordController.text != cnfPasswordController) {
+    if (passwordController.text != cnfPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Password do not match!'),
+          content: Text('Passwords do not match!'),
         ),
       );
       return;
@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     // get auth service
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
-      await authService.signInwithEmailandPassword(
+      await authService.signUpWithEmailandPassword(
         emailController.text,
         passwordController.text,
       );
@@ -54,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: primaryColor,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Icon(
                   Icons.message,
                   size: 100,
-                  color: Colors.grey[800],
+                  color: secondaryColor,
                 ),
 
                 largeSizedBox,
@@ -77,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const Text(
                   "Let's create an account for you!",
                   style: TextStyle(
+                    color: whiteColor,
                     fontSize: 16,
                   ),
                 ),
@@ -122,13 +123,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Already a member?'),
+                    const Text(
+                      'Already a member?',
+                      style: TextStyle(color: whiteColor),
+                    ),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
                         'Sign In',
                         style: TextStyle(
+                          color: whiteColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

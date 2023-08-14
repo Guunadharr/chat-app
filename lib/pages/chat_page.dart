@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chat_app/services/chat/chat_service.dart';
+import 'package:chat_app/utils/commons.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,6 +38,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       appBar: AppBar(title: Text(widget.receiverUserEmail)),
       body: Column(
         children: [
@@ -109,6 +111,7 @@ class _ChatPageState extends State<ChatPage> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // textfield
           Expanded(
@@ -118,13 +121,18 @@ class _ChatPageState extends State<ChatPage> {
               obscureText: false,
             ),
           ),
-
+          SizedBox(width: 10),
           // send button
-          IconButton(
-            onPressed: sendMessage,
-            icon: const Icon(
-              Icons.arrow_upward,
-              size: 40,
+          Container(
+            decoration: BoxDecoration(
+                color: secondaryColor, borderRadius: BorderRadius.circular(20)),
+            child: IconButton(
+              onPressed: sendMessage,
+              icon: const Icon(
+                color: whiteColor,
+                Icons.arrow_upward,
+                size: 40,
+              ),
             ),
           ),
         ],
